@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\UploadPostImageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;

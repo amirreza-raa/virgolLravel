@@ -3,21 +3,12 @@
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\DraftController;
 use App\Http\Controllers\UpdateProfileController;
 use App\Http\Controllers\UploadPostImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
 Route::middleware('auth:sanctum')->get('/me', function (Request $request) {
     return $request->user();
@@ -36,6 +27,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/profile', [UpdateProfileController::class,'update'])
         ->name('profile.update');
 
-    Route::post('/upload-post-image', [UploadPostImageController::class])
+    Route::post('/upload-post-image', [UploadPostImageController::class , 'store'])
         ->name('upload_post_image');
+
+
+    Route::post('/posts/create', [DraftController::class , 'store'])
+        ->name('draft.store');
+
+    Route::post('/drafts/{draft }', [DraftController::class , 'show'])
+        ->name('draft.show');
+
+        Route::get('/drafts/{draft }', [DraftController::class , 'update'])
+        ->name('draft.update');
 });
